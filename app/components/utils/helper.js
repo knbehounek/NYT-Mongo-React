@@ -19,7 +19,7 @@ var helpers = {
 				var fullResults = response.data.response.docs;
 				var counter = 0;
 
-				//Gets first 5 articles that have all 3 components
+				//Gets first 5 articles 
 				for(var i = 0; i < fullResults.length; i++){
 
 					if(counter > 4) {

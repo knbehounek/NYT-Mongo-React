@@ -5,44 +5,35 @@
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
-/******/ 		};
-
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
+ 		if(installedModules[moduleId])
+ 			return installedModules[moduleId].exports;
 
 
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
+		var module = installedModules[moduleId] = {
+ 			exports: {},
+			id: moduleId,
+			loaded: false
+	};
+	
+modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+		module.loaded = true;
 
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
+	return module.exports;
+	}
 
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
 
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ function(module, exports, __webpack_require__) {
+	__webpack_require__.m = modules;
+
+	__webpack_require__.c = installedModules;
+
+ 	__webpack_require__.p = "";
+
+
+ 	return __webpack_require__(0);
+ })
+ ([
+
+ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -53,32 +44,19 @@
 	// Include the Main Component
 	var Main = __webpack_require__(159);
 
-	// This code here allows us to render our main component (in this case "Main")
 	ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
 
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
+ },
+ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	module.exports = __webpack_require__(2);
 
 
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
+ },
+function(module, exports, __webpack_require__) {
 
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule React
-	 */
 
 	'use strict';
 
@@ -110,22 +88,11 @@
 
 	module.exports = React;
 
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
+ },
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactDOM
-	 */
+function(module, exports, __webpack_require__) {
 
-	/* globals __REACT_DEVTOOLS_GLOBAL_HOOK__*/
+	(function(process) {
 
 	'use strict';
 
@@ -152,15 +119,10 @@
 	  render: render,
 	  unmountComponentAtNode: ReactMount.unmountComponentAtNode,
 	  version: ReactVersion,
-
-	  /* eslint-disable camelcase */
 	  unstable_batchedUpdates: ReactUpdates.batchedUpdates,
 	  unstable_renderSubtreeIntoContainer: renderSubtreeIntoContainer
 	};
 
-	// Inject the runtime into a devtools global hook regardless of browser.
-	// Allows for debugging when the hook is injected on the page.
-	/* eslint-enable camelcase */
 	if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.inject === 'function') {
 	  __REACT_DEVTOOLS_GLOBAL_HOOK__.inject({
 	    CurrentOwner: ReactCurrentOwner,
@@ -175,16 +137,12 @@
 	  var ExecutionEnvironment = __webpack_require__(9);
 	  if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
 
-	    // First check if devtools is not installed
+	   
 	    if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
-	      // If we're in Chrome or Firefox, provide a download link if not installed.
 	      if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Edge') === -1 || navigator.userAgent.indexOf('Firefox') > -1) {
 	        console.debug('Download the React DevTools for a better development experience: ' + 'https://fb.me/react-devtools');
 	      }
 	    }
-
-	    // If we're in IE8, check to see if we are in compatibility mode and provide
-	    // information on preventing compatibility mode
 	    var ieCompatibilityMode = document.documentMode && document.documentMode < 8;
 
 	    process.env.NODE_ENV !== 'production' ? warning(!ieCompatibilityMode, 'Internet Explorer is running in compatibility mode; please add the ' + 'following tag to your HTML to prevent this from happening: ' + '<meta http-equiv="X-UA-Compatible" content="IE=edge" />') : undefined;
@@ -208,17 +166,11 @@
 	module.exports = React;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
+},
+function(module, exports) {
 
-	// shim for using process in browser
 	var process = module.exports = {};
 
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
 
 	var cachedSetTimeout;
 	var cachedClearTimeout;
@@ -241,18 +193,17 @@
 	} ())
 	function runTimeout(fun) {
 	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
+	        
 	        return setTimeout(fun, 0);
 	    }
 	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	       
 	        return cachedSetTimeout(fun, 0);
 	    } catch(e){
 	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
 	            return cachedSetTimeout.call(null, fun, 0);
 	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	      
 	            return cachedSetTimeout.call(this, fun, 0);
 	        }
 	    }
