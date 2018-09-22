@@ -1,13 +1,12 @@
-// Include the Main React Dependencies
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Router = require('react-router').Router;
 
-// Include the Main Component
-var Main = require('./Components/Main')
+var routes = require('./config/routes');
 
-// This code here allows us to render our main component (in this case "Main")
 ReactDOM.render(
 
-	<Main />,
-	document.getElementById('app')
-)
+  <Router>{routes}</Router>,
+  document.getElementById('app')
+
+);

@@ -1,11 +1,10 @@
-# NYT-react
+# New York Times Article Scrubber
+This application utilizes The New York Times API to search and display news articles using React and React router. It also uses Node, Express and MongoDB so that users can save articles to read later.
 
 
-This app uses the full MERN stack to create a React-based rendition of the New York Times search engine. User has the ability to search for articles, save and delete them.
+## Link
+https://nyt-article-scrubber.herokuapp.com
 
-- MongoDB 
-- Express 
-- React  
-- Node
 
-This app is live at https://scrape-react.herokuapp.com/
+__*Built by Nida :100:*__
+

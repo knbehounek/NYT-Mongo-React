@@ -1,15 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var logger = require('morgan');
 var mongoose = require('mongoose');
 
-var Article = require('./models/article.js');
+var Article = require('./models/Article.js');
 
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-// Run Morgan for Logging
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
@@ -17,10 +14,11 @@ app.use(bodyParser.json({type:'application/vnd.api+json'}));
 
 app.use(express.static('./public'));
 
+var link = 'mongodb://heroku_f20841fp:ikh0mauhe69khuctk9v4lip93b@ds147864.mlab.com:47864/heroku_f20841fp';
+//Local link
+// var link = 'mongodb://localhost/nytreact';
 
-mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds111113.mlab.com:11113/heroku_4hhv3nl4");
-
-
+mongoose.connect(link);
 var db = mongoose.connection;
 
 db.on('error', function (err) {
@@ -50,33 +48,34 @@ app.get('/api/saved', function(req, res) {
 });
 
 app.post('/api/saved', function(req, res){
+  var newArticle = new Article(req.body);
 
-  var newArticle = new Article({
-    title: req.body.title,
-    date: req.body.date,
-    url: req.body.url
-  });
+  var title = req.body.title;
+  var date = req.body.date;
+  var url = req.body.url;
 
   newArticle.save(function(err, doc){
     if(err){
       console.log(err);
-      res.send(err);
     } else {
-      res.json(doc);
+      res.send(doc._id);
     }
   });
-
 });
 
-app.delete('/api/saved/:id', function(req, res){
+app.delete('/api/saved/', function(req, res){
 
-  Article.find({'_id': req.params.id}).remove()
-    .exec(function(err, doc) {
-      res.send(doc);
+  var url = req.param('url');
+
+  Article.find({"url": url}).remove().exec(function(err, data){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.send("Deleted");
+    }
   });
-
 });
-
 
 
 app.listen(PORT, function() {
